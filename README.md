@@ -45,7 +45,7 @@ To get a local copy up and running follow these simple steps.
        yarn
    ```
 
-### Usage
+## Usage
 
 ### Docker
 

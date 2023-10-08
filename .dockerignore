@@ -1,0 +1,26 @@
+# Ignore node_modules, as we'll install dependencies inside the Docker container
+node_modules
+
+# Ignore development-specific files
+.git
+.gitignore
+Dockerfile
+.dockerignore
+
+# Ignore any local TypeScript build artifacts
+dist
+
+# Ignore editor-specific files
+.vscode
+.idea
+
+# Ignore any log files or other runtime artifacts
+logs
+*.log
+
+# Ignore npm debug logs
+npm-debug.log*
+
+# Ignore any temporary files or directories
+.tmp
+.temp

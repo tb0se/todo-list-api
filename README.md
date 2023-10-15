@@ -35,9 +35,6 @@ To get a local copy up and running follow these simple steps.
        PORT=5000
        JWT_SECRET="supersecret"
        NODE_ENV='development'
-
-       DATABASE_URL="postgresql://user:password@localhost:5432"
-       REDIS_URL="redis://localhost:6379"
    ```
 
 3. Install the required dependencies:
@@ -52,9 +49,8 @@ To get a local copy up and running follow these simple steps.
 The following additional environmental variables are required:
 
 ```bash
-    POSTGRES_USER='user'
-    POSTGRES_PASSWORD='password'
-    POSTGRES_DB='tododb'
+    DATABASE_URL="postgresql://user:password@postgres:5432/tododb"
+    REDIS_URL="redis://redis:6379"
 ```
 
 Start the containers required with the following command:
@@ -69,6 +65,13 @@ Ensure you have installed and configured:
 
 - PostgreSQL server
 - Redis server
+
+The following additional environmental variables are required:
+
+```bash
+    DATABASE_URL="postgresql://user:password@localhost:5432/tododb"
+    REDIS_URL="redis://localhost:6379"
+```
 
 1. Start the dev server
 

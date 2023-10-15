@@ -10,7 +10,8 @@
 		"preview": "node dist/index.js",
 		"build": "npx tsc",
 		"dev": "ts-node-dev --respawn --transpile-only --exit-child --watch src ./src/index.ts",
-		"start": "ts-node ./src/index.ts"
+		"start": "ts-node ./src/index.ts",
+		"start:migrate": "prisma migrate deploy && ts-node ./src/index.ts"
 	},
 	"dependencies": {
 		"@prisma/client": "5.4.1",

@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import jwt from 'jsonwebtoken';
 import { ZodIssue } from 'zod';
 
@@ -12,4 +13,13 @@ const prettyError = (error: ZodIssue[]) => {
 	return errorMessages.toString();
 };
 
-export { generateToken, prettyError };
+function customKeyGenerator(req: Request): string {
+	if (!req.ip) {
+		console.error('Warning: request.ip is missing!');
+		return req.socket.remoteAddress!;
+	}
+
+	return req.ip.replace(/:\d+[^:]*$/, '');
+}
+
+export { generateToken, prettyError, customKeyGenerator };

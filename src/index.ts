@@ -13,11 +13,14 @@ import errorHandler from './middleware/error.middleware';
 import swaggerSchema from './swagger.json';
 
 import dotenv from 'dotenv';
+import { customKeyGenerator } from './utils';
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 5000;
+const port = Number(process.env.PORT) || 5000;
+const hostname = process.env.HOST || 'localhost';
+const numberOfProxies = Number(process.env.NO_OF_PROXIES) || 2; // the number of proxies between the user and the server
 const corsOptions = {
 	origin: '*',
 	optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -36,7 +39,10 @@ const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
 	max: 100, // Max requests per IP
 	message: 'Too many requests, please try again later.',
+	keyGenerator: customKeyGenerator,
 });
+
+app.set('trust proxy', numberOfProxies);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -53,6 +59,7 @@ app.get('/api-docs', swaggerUi.setup(swaggerSchema));
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-	console.log(`🚀 [server]: Server is running at http://localhost:${port}`);
+app.listen(port, hostname, () => {
+	console.log(`🚀 [server]: Server is running at http://${hostname}:${port}`);
+	console.log(`💾 [postgresql]: Connected at ${process.env.DATABASE_URL}`);
 });

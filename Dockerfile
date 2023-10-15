@@ -25,5 +25,7 @@ COPY . .
 # Expose the port the app will run on
 EXPOSE 5000
 
+ENV NODE_ENV production
+
 # Start the app
-CMD yarn start && npx prisma migrate dev
+CMD [  "yarn",  "start:migrate" ]

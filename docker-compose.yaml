@@ -26,6 +26,7 @@ services:
       - redis
     environment:
       NODE_ENV: ${NODE_ENV}
+      HOST: ${HOST}
       DATABASE_URL: ${DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
       JWT_SECRET: ${JWT_SECRET}
